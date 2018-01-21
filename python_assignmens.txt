@@ -1,0 +1,253 @@
+1. What will be the output of 'seclist' in print commands of below code?
+mylist = range(4)
+seclist = mylist
+print seclist
+mylist.append(4)
+print seclist
+seclist = mylist[:]
+print seclist
+mylist.append(5)
+print seclist
+
+output::::::::
+Range object don't have the attribute append
+
+=====================================================
+2. What is the output of following code:
+def f(n):
+  for x in range(n):
+    yield x**3
+
+for x in f(6):
+  print x
+
+
+output:::::::::
+0
+1
+8
+27
+64
+125
+
+=====================================================
+3. Write a program to receive a string from keybord and check if the string has two 'e' in the characters. 
+   If yes return True else False.
+
+
+count=0
+string=input()
+for i in range(len(string)-1):
+  if(string[i]=="e"):
+    count=count+1
+if(count==2):
+  print("True")
+else:
+  print("False")
+
+output::::::::::
+ keerana
+True
+
+=========================================================
+4. What is the output of following code:
+
+counter = 1
+def dolots(count):
+  global counter
+  for i in (1, 2, 3):
+    counter = count + i
+
+print dolots(4)
+print counter
+
+output:::::::::
+None
+7
+
+========================================================
+
+5.Write a code to read  the data from  input file called input.txt and count the number of characters per line, number of words per line and write these into output file called as output.txt 
+
+#Write a code to read  the data from  input file called input.txt and count the number of #characters per line, number of words per line and write these into output file called as #output.txt 
+words_count=0
+char_count=0
+
+file1=open("input.txt","r")
+file2=open("output.txt","w")
+for line in file1:
+	l=1
+	words=line.split()
+	words_count=len(words)
+	char_count=len(line)
+	file2.write("line num:%d Number of words:%d Number of words %d \n" %(l,words_count,char_count))
+	l=l+1
+------------------------------
+output:::::::
+
+input:::
+hii harika
+how r u??
+
+output:::
+line num:1 Number of words:2 Number of words 11 
+line num:1 Number of words:3 Number of words 9 
+
+
+6.Create 3 Lists ( list1,list2,list3) with numbers and perform following operations
+
+List1=[1,2,3,4,5,0]
+List2=[7,4,3,2,6,5,2,1]
+List3=[9,5,3,0,1]
+#a) Create Maxlist by taking 2 maximum elements from each list.
+List1.sort()
+List2.sort()
+List3.sort()
+print (List1)
+List5=List1[len(List1)-1],List1[len(List1)-2],List2[len(List2)-1],List2[len(List2)-2],List3[len(List3)-1],List3[len(List3)-2]
+print (List5)
+
+#b) Find average value from all the elements of Maxlist.
+sum=0
+for i in range(len(List5)):
+  sum=sum+List5[i]
+avg=sum/len(List5)
+print (avg)
+#c) Create Minlist by taking 2 minimum elements from each list.
+List6=List1[0],List1[1],List2[0],List2[1],List3[0],List3[1]
+print (List6)
+
+#d) Find average value from all the elements of Maxlist.
+sum=0
+for i in range(len(List6)):
+  sum=sum+List6[i]
+avg_min=sum/len(List6)
+print (avg_min)
+
+---------------------------
+output:
+[0, 1, 2, 3, 4, 5]
+(5, 4, 7, 6, 9, 5)
+6.0
+(0, 1, 1, 2, 0, 1)
+0.8333333333333334
+
+=============================================================
+7.	Write program to convert prefix/net mask to IP
+eg: input:16  output: 255.255.0.0
+
+from socket import inet_ntoa
+from struct import pack
+
+
+def DottedNetmask(mask):
+	bits =  0xffffffff ^ (1 << 32 - mask)-1
+	return inet_ntoa(pack('>I', bits))
+
+mask=int(input("enter a mask"))
+ip=DottedNetmask(mask)
+print(ip)
+
+------------------
+output:
+
+C:\Users\Harika\Desktop>python ip.py
+enter a mask16
+255.255.0.0
+
+=========================================================
+8.	Create a suitable data construct to read the data from an xml document as shown below:
+<bookstore shelf="New Arrivals">
+  <book category="COOKING">
+    <title lang="en">Everyday Italian</title>
+    <author>Giada De Laurentiis</author>
+    <year>2005</year>
+    <price>30.00</price>
+  </book>
+  <book category="CHILDREN">
+    <title lang="en">Harry Potter</title>
+    <author>J K. Rowling</author>
+    <year>2005</year>
+    <price>29.99</price>
+  </book>
+  <book category="WEB">
+    <title lang="en">Learning XML</title>
+    <author>Erik T. Ray</author>
+    <year>2003</year>
+    <price>39.95</price>
+  </book>
+</bookstore>
+
+
+
+
+import xml.etree.ElementTree as ET
+tree = ET.parse('items.xml')
+root = tree.getroot()
+for child in root:
+	print(child.tag,child.attrib)
+	for item in child:
+		print(item.tag,":",item.text)
+
+--------------
+output::::
+
+C:\Users\Harika\Desktop>python ip.py
+book {'category': 'COOKING'}
+title : Everyday Italian
+author : Giada De Laurentiis
+year : 2005
+price : 30.00
+book {'category': 'CHILDREN'}
+title : Harry Potter
+author : J K. Rowling
+year : 2005
+price : 29.99
+book {'category': 'WEB'}
+title : Learning XML
+author : Erik T. Ray
+year : 2003
+price : 39.95
+
+====================================================================
+9)Create a suitable object type and  check for file size of 0 bytes of the directory contents as shown below
+02/15/2016              10:49 PM               962                     switchfinal.py
+02/15/2016             10:49 PM               943                       switchfinal.py.bak
+01/27/2016             11:46 AM                15                        t.py
+03/31/2016            12:39 PM               840                        t1.py
+01/25/2016            10:34 AM             2,407                      tc1.py
+02/14/2017           09:13 AM                 0                           teat.py
+03/15/2016          05:52 PM                 5                             tes.py
+
+
+
+
+
+import os
+my_dir = r'C:\Users\Harika\Desktop\python'
+
+for f in os.listdir(my_dir):   #listing the all the files in the directory
+	path = os.path.join(my_dir, f)#mapping the file with the  path 
+	if os.path.isfile(path):  #checking if the file Exists
+		if(os.path.getsize(path)==0):
+			print(f)
+------------------
+output:::::
+
+C:\Users\Harika\Desktop>python 9.py
+empty.txt size::: 0
+
+NOte:::taken the python folder in that empty has 0 in size.
+
+====================================================================
+10)Create a suitable object type to eliminate the duplicate elements
+
+list=[2,7,3,6,1,2,7]
+rem_dup=set()   #It is the funtion to remove the duplicates
+for i in list:
+	rem_dup.add(i)
+print(rem_dup)
+--------------------
+
+output::
+{1, 2, 3, 6, 7}
